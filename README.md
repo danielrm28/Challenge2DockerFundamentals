@@ -37,3 +37,5 @@ Our final step is run the frontend app
 `docker start teemii-frontend`
 
 All set! We've finished the challenge 😄.
+
+https://github.com/danielrm28/Challenge2DockerFundamentals/blob/main/Challenge2DockerFundamentals.png
