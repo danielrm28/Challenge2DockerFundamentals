@@ -4,7 +4,7 @@ This is challenge number 3 in the Docker Fundamentals course by [Gelopfalcon](ht
 
 **Commands Used**
 
-First, download the archive docker'compose.yml.
+First, download the archive `docker-compose.yml`
 
 Then, we need to use this command
 
