@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - teemii-network
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  teemii-backend:
+    image: dokkaner/teemii-backend:develop
+    container_name: teemii-backend
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: postgres
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - teemii-network
+
+  teemii-frontend:
+    image: dokkaner/teemii-frontend:develop
+    container_name: teemii-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - teemii-backend
+    networks:
+      - teemii-network
+
+networks:
+  teemii-network:
+    driver: bridge
+
+volumes:
+  pgdata:
